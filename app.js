@@ -74,13 +74,10 @@ io.on('connection', (socket) => {
   socket.on('sendMessage', (message, sender, receiver, callback) => {
     const senderId = sender._id;
     const receiverId = receiver._id;
-    console.log("RECEIVER", receiver);
-    console.log("SENDER", sender);
-    console.log("MESSAGE", message);
     Socket.findOne({ email: receiver.email }).exec(async (err, res) => {
       const newChat = new Chat({
         message,
-        receiver,
+        receiverId,
         senderId
       });
       await newChat.save((err, result) => {
