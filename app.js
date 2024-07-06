@@ -77,8 +77,8 @@ io.on('connection', (socket) => {
     Socket.findOne({ email: receiver.email }).exec(async (err, res) => {
       const newChat = new Chat({
         message,
-        receiverId,
-        senderId
+        receiver,
+        sender
       });
       await newChat.save((err, result) => {
         if (err) {
